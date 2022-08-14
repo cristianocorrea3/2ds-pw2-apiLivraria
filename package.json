@@ -1,0 +1,22 @@
+{
+  "name": "apilibri",
+  "version": "1.0.0",
+  "description": "API REST PARA GERENCIAR DE LIVROS.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "API",
+    "REST",
+    "PW2",
+    "ETEC",
+    "BARUERI",
+    "NODEJS"
+  ],
+  "author": "CRISTIANO CORREA DE MORAES",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
