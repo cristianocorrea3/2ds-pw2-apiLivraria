@@ -9,9 +9,10 @@ const app = express();
 /** ROTAS DE CRUD DE CATEGORIA **/
 
 //ROTA DE CADASTRO DE CATEGORIA
+//NOME(P1, P2, P3, P4){}
 app.post('/cadastrarCategoria', (req, res)=>{
     res.send('ROTA DE CADASTRO DE CATEGORIA!');
-    console.log('TESTE DE NODEMON');
+    // console.log('TESTE DE NODEMON');
 });
 
 //ROTA DE LEITURA DE CATEGORIA
