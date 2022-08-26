@@ -1,7 +1,7 @@
 {
   "name": "apilibri",
   "version": "1.0.0",
-  "description": "API REST PARA GERENCIAR DE LIVROS.",
+  "description": "API REST PARA GERENCIAMENTO DE LIVROS.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

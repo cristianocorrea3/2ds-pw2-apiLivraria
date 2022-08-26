@@ -1,5 +1,5 @@
 //IMPORTAÇÃO DO PACOTE SEQUELIZE
-const Sequelize  = require('sequelize');
+const Sequelize = require('sequelize');
 
 /***** CRIA A CONEXÃO COMO BANCO DE DADOS *****/
 /*
@@ -13,7 +13,7 @@ PARAMETROS DO SEQUELIZE
 */
 const connection = new Sequelize(
                                     'bd_libri_api', 
-                                    'root', 
+                                    'root',
                                     '',
                                     {
                                         host:'localhost',
