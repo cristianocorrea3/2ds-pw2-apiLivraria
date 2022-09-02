@@ -10,15 +10,17 @@ PARAMETROS DO SEQUELIZE
 4 - JSON:
     4.1 - O LOCAL ONDE O BANCO ESTÁ EXECUTANTO (host)
     4.2 - TIPO DO BANCO (dialect)
+    4.3 - DEFINE O FUSO HORARIO LOCAL
 */
 const connection = new Sequelize(
-                                    'bd_libri_api', 
-                                    'root',
-                                    '',
-                                    {
-                                        host:'localhost',
-                                        dialect:'mysql'
-                                    }
-                                );
+        'bd_libri_api', 
+        'root',
+        '',
+        {
+            host:'localhost',
+            dialect:'mysql',
+            timezone: '-03:00'
+        }
+    );
 
 module.exports = connection;
