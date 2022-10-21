@@ -10,8 +10,23 @@ const router = express.Router();
 //ROTA DE CADASTRO DE CATEGORIA
 //NOME(P1, P2, P3, P4){}
 router.post('/cadastrarCategoria', (req, res)=>{
-    res.send('ROTA DE CADASTRO DE CATEGORIA!');
+
+    console.log(req.body);
+
+    // let nome_categoria = req.body.nome_categoria;
+    let {nome_categoria} = req.body;
+
+    modelCategoria.create(
+        //DADOS DA INSERÇÂO
+        {nome_categoria}
+
+    ).then(
+        res.send('CATEGORIA CADASTRADA COM SUCESSO!')
+    );
+
+    // res.send('ROTA DE CADASTRO DE CATEGORIA!');
     // console.log('TESTE DE NODEMON');
+
 });
 
 //ROTA DE LEITURA DE CATEGORIA

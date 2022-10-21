@@ -7,6 +7,8 @@ ATRAVÉS DA CONSTANTE app
 */
 const app = express();
 
+app.use(express.json());
+
 console.log('teste de github')
 
 app.use('/', routesCategoria);
