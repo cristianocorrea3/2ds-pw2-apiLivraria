@@ -29,14 +29,34 @@ router.post('/cadastrarCategoria', (req, res)=>{
 
 });
 
-//ROTA DE LEITURA DE CATEGORIA
+//ROTA DE LISTAGEM DE CATEGORIA
 router.get('/listarCategoria', (req, res)=>{
-    res.send('ROTA DE LISTAGEM DE CATEGORIA!');
+
+    modelCategoria.findAll()
+        .then(
+            (response)=>{
+                //console.log(response);
+                res.status(200).json(response);
+
+            }
+        )
+
 });
 
 //ROTA DE ALTERAÇÃO DE CATEGORIA
 router.put('/alterarCategoria', (req, res)=>{
-    res.send('ROTA DE ALTERAÇÃO DE CATEGORIA!');
+
+    // const cod_categoria = req.body.cod_categoria;
+    // const nome_categoria = req.body.nome_categoria;
+    const {cod_categoria, nome_categoria} = req.body;
+
+    modelCategoria.update(
+        {nome_categoria},
+        {where:{cod_categoria}}
+    ).then(
+        res.send('CATEGORIA ALTERADA COM SUCESSO!')
+    )
+    
 });
 
 //ROTA DE EXCLUSÃO DE CATEGORIA
@@ -45,3 +65,5 @@ router.delete('/excluirCategoria', (req, res)=>{
 });
 
 module.exports = router;
+
+
