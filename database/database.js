@@ -13,7 +13,7 @@ PARAMETROS DO SEQUELIZE
     4.3 - DEFINE O FUSO HORARIO LOCAL
 */
 const connection = new Sequelize(
-        'bd_libri_api', 
+        'bd_libri_api2', 
         'root',
         '',
         {

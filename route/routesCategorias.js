@@ -10,18 +10,27 @@ const router = express.Router();
 //ROTA DE CADASTRO DE CATEGORIA
 //NOME(P1, P2, P3, P4){}
 router.post('/cadastrarCategoria', (req, res)=>{
-
     console.log(req.body);
-
     // let nome_categoria = req.body.nome_categoria;
     let {nome_categoria} = req.body;
-
     modelCategoria.create(
         //DADOS DA INSERÇÂO
         {nome_categoria}
-
     ).then(
-        res.send('CATEGORIA CADASTRADA COM SUCESSO!')
+        ()=>{
+            return res.status(201).json({
+                erroStatus:false,
+                mensagemStatus:"CATEGORIA INSERIDA COM SUCESSO."
+            })
+        }
+    ).catch(
+        (error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO CADASTRAR A CATEGORIA.",
+                errorObject:error
+            });
+        }
     );
 
     // res.send('ROTA DE CADASTRO DE CATEGORIA!');
@@ -60,8 +69,15 @@ router.put('/alterarCategoria', (req, res)=>{
 });
 
 //ROTA DE EXCLUSÃO DE CATEGORIA
-router.delete('/excluirCategoria', (req, res)=>{
-    res.send('ROTA DE EXCLUSÃO DE CATEGORIA!');
+router.delete('/excluirCategoria/:cod_categoria', (req, res)=>{
+    console.log(req.params);
+    let {cod_categoria} = req.params
+
+    modelCategoria.destroy(
+        {where:{cod_categoria}}
+    ).then(
+        res.send('CATEGORIA EXCLUIDA COM SUCESSO!')
+    )
 });
 
 module.exports = router;
