@@ -38,17 +38,84 @@ router.post('/cadastrarCategoria', (req, res)=>{
 
 });
 
-//ROTA DE LISTAGEM DE CATEGORIA
+//ROTA DE LISTAGEM DE CATEGORIA SEM CRITÉRIO
 router.get('/listarCategoria', (req, res)=>{
 
     modelCategoria.findAll()
         .then(
             (response)=>{
                 //console.log(response);
-                res.status(200).json(response);
-
+                return res.status(200).json({
+                    erroStatus:false,
+                    mensagemStatus:"CATEGORIAS LISTADAS COM SUCESSO.",
+                    data:response
+                })
             }
-        )
+        ).catch(
+            (error)=>{
+                return res.status(400).json({
+                    erroStatus:true,
+                    mensagemStatus:"ERRO AO LISTAR AS CATEGORIAS.",
+                    errorObject:error
+                });
+            }
+        );
+
+});
+
+//ROTA DE LISTAGEM DE CATEGORIA POR COD_CATEGORIA
+router.get('/listarCategoriaPK/:cod_categoria', (req, res)=>{
+
+    //DECLARAR E RECEBER O DADO DE CODIGO DE CATEGORIA
+    let {cod_categoria} = req.params;
+
+    //AÇÃO DE SELEÇÃO DE DADOS DO SEQUELIZE
+    modelCategoria.findByPk(cod_categoria)
+    .then(
+        (response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"CATEGORIA RECUPERADA COM SUCESSO.",
+                data:response
+            })
+        }
+    )
+    .catch(
+        (error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO RECUPERAR A CATEGORIA.",
+                errorObject:error
+            });
+        }
+    )
+
+});
+
+//ROTA DE LISTAGEM DE CATEGORIA POR NOME_CATEGORIA
+router.get('/listarCategoriaNOME/:nome_categoria', (req, res)=>{
+
+    let {nome_categoria} = req.params;
+
+    modelCategoria.findOne({attributes:['cod_categoria', 'nome_categoria'],where:{nome_categoria}})
+    .then(
+        (response)=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"CATEGORIA RECUPERADA COM SUCESSO.",
+                data:response
+            })
+        }
+    )
+    .catch(
+        (error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO RECUPERAR A CATEGORIA.",
+                errorObject:error
+            });
+        }
+    )
 
 });
 
@@ -63,8 +130,21 @@ router.put('/alterarCategoria', (req, res)=>{
         {nome_categoria},
         {where:{cod_categoria}}
     ).then(
-        res.send('CATEGORIA ALTERADA COM SUCESSO!')
-    )
+        ()=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"CATEGORIA ALTERADA COM SUCESSO."
+            })
+        }
+    ).catch(
+        (error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO ALTERAR A CATEGORIA.",
+                errorObject:error
+            });
+        }
+    );
     
 });
 
@@ -76,8 +156,21 @@ router.delete('/excluirCategoria/:cod_categoria', (req, res)=>{
     modelCategoria.destroy(
         {where:{cod_categoria}}
     ).then(
-        res.send('CATEGORIA EXCLUIDA COM SUCESSO!')
-    )
+        ()=>{
+            return res.status(200).json({
+                erroStatus:false,
+                mensagemStatus:"CATEGORIA EXCLUIDA COM SUCESSO."
+            })
+        }
+    ).catch(
+        (error)=>{
+            return res.status(400).json({
+                erroStatus:true,
+                mensagemStatus:"ERRO AO EXCLUIR A CATEGORIA.",
+                errorObject:error
+            });
+        }
+    );
 });
 
 module.exports = router;
